@@ -1,0 +1,75 @@
+.root {
+    margin: 100px 0;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.media {
+    padding: 50% 50%;
+    border-right: 2px solid gray;
+}
+.card-content {
+    width: auto;
+    align-self: center;
+}
+.name {
+    color: #111111;
+    font-family: sans-serif;
+    border-bottom: 2px solid black;
+    padding: 25px 0;
+}
+.desc-div {
+    display: flex;
+    margin: 15px 0;
+}
+.desc {
+    align-self: center;
+}
+.description {
+    padding: 2px 5px;
+    position: relative;
+    top: 2px;
+}
+.btn-div {
+    margin: 25px 0;
+    font-size: 22px;
+    font-family: sans-serif;
+}
+.quantity {
+    font-size: 18px;
+}
+.available {
+    padding: 20px 0 0 0;
+}
+.subtotal-price {
+    color: black;
+}
+
+@media only screen and (max-width: 625px) {
+    .root {
+        margin: 60px 0 35px 0;
+        padding: 20px;
+        grid-template-columns: 1fr;
+    }
+    .media {
+        border-bottom: 2px solid gray;
+        border-right: none;
+        padding: 50% 45%;
+    }
+    .name {
+        padding: 10px 0;
+    }
+    .desc-div {
+        margin: 0;
+    }
+    .btn-div {
+        font-size: 20px;
+        margin: 0;
+    }
+    .quantity {
+        font-size: 14px;
+    }
+    .available {
+        padding: 0;
+    }
+}
