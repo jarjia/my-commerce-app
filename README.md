@@ -2,7 +2,7 @@
 
 In this app you can upload your products on api and it will be displayed on the page, also you can buy them with test card and the order will be sent to your gmail with all the details
 
-## Technologys i used:
+## Technologies i used:
     - React.js (^18.2.0)
     - react-hook-form (^7.33.1)
     - react-router-dom (^6.3.0")
@@ -16,7 +16,7 @@ In this app you can upload your products on api and it will be displayed on the 
 
 ## How to access my app:
 
-$ git clone https://github.com/jarjia/my-commerce-app.git
-$ cd my-blog
-$ npm install
-$ npm start
+- $ git clone https://github.com/jarjia/my-commerce-app.git
+- $ cd my-blog
+- $ npm install
+- $ npm start
