@@ -1,16 +1,22 @@
 import React from 'react'
 import { Card, CardMedia, CardContent, CardActions, Typography, IconButton} from '@mui/material'
-import { AddShoppingCart, ProductionQuantityLimits } from  '@mui/icons-material'
+import { AddShoppingCart } from  '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import useStyles from './styles'
 
 const Product = ({product, onAddToCart}) => {
     const classes = useStyles();
+    console.log(product);
 
     const handleAddToCart = () => onAddToCart(product.id, 1);
 
   return (
     <Card className={classes.root}>
+        <div className={classes.stockDiv} style={{
+            background: product.inventory.available === 0 ? '#FF0000' : '#36DD00'
+        }}>
+            {product.inventory.available === 0 ? 'Out of Stock' : 'In Stock'}
+        </div>
         <CardMedia className={classes.media} image={product.image.url} title={product.name}/>
         <CardContent>
             <div className={classes.cardContent}>
@@ -28,7 +34,7 @@ const Product = ({product, onAddToCart}) => {
                 <Link to={`/:${product.id}`} className={classes.link}>Show more</Link>
             </IconButton>
             <IconButton aria-label='Add to Cart'
-                onClick={handleAddToCart}
+                onClick={product.inventory.available > 0 && handleAddToCart}
             >
                 <AddShoppingCart />
             </IconButton>

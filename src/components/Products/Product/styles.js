@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { textAlign } from '@mui/system';
 
 export default makeStyles(() => ({
   root: {
-    maxWidth: '100%',
+    maxWidth: '100%'
   },
   media: {
     height: 0,
@@ -22,5 +23,16 @@ export default makeStyles(() => ({
     fontSize: '16px',
     fontFamily: 'sans-serif',
     color: '#111111'
+  },
+  stockDiv: {
+    background: 'green',
+    float: 'right',
+    margin: '10px 15px',
+    padding: '5px 8px',
+    borderRadius: '50px',
+    userSelect: 'none',
+    color: 'white',
+    fontFamily: 'sans-serif',
+    fontSize: '14px'
   }
 }));

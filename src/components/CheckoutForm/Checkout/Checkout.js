@@ -3,7 +3,6 @@ import { CssBaseline, Paper, Stepper, Step, StepLabel, Typography, CircularProgr
 import { Link, useNavigate } from 'react-router-dom';
 import { commerce } from '../../../lib/Commerce';
 import useStyles from './styles'
-import { stepperClasses } from '@mui/material';
 import AddressFrom from '../AddressForm'
 import PaymentForm from '../PaymentForm'
 
@@ -30,7 +29,7 @@ const Checkout = ({cart, error, handleCaptureCheckout, order}) => {
       }
     }
     generateToken()
-  }, [cart])
+  }, [cart, activeStep, navigate])
 
   const test = (data) => {
     setShippingData(data)

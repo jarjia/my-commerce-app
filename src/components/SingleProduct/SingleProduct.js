@@ -1,22 +1,21 @@
 import React, {useState, useEffect} from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Button } from '@material-ui/core';
 import { Card, CardMedia, CardContent, Typography} from '@mui/material'
 import './styles.css'
+import { FormatColorResetRounded } from '@mui/icons-material';
 
 const SingleProduct = ({products, handleAddToCart}) => {
-  const [add, setAdd] = useState(1);
+  const [add, setAdd] = useState(0);
   const { productId } = useParams();
   const navigate = useNavigate();
 
   const product = products.find(item => `:${item.id}` === productId)
   let price = parseFloat(product.price.formatted.replace(/,/g, ''))
 
-  console.log(products);
-
   const handleIncrease = () => {
     setAdd(prev => {
-      if(prev === product.inventory.available) {
+      if(prev === product.inventory.available || product.inventory.available === 0) {
         return prev = product.inventory.available
       }else {
         return prev + 1
@@ -26,8 +25,8 @@ const SingleProduct = ({products, handleAddToCart}) => {
 
   const handleDecrease = () => {
     setAdd(prev => {
-      if(prev === 1) {
-        return prev = 1
+      if(prev === 0) {
+        return prev = 0
       }else {
         return prev - 1
       }
@@ -47,14 +46,14 @@ const SingleProduct = ({products, handleAddToCart}) => {
         <Typography variant='h6' className='price'>Price: <span style={{color: '#1976d2', fontSize: '20px', marginLeft: '5px'}}>{product.price.formatted_with_symbol}</span></Typography>
         <Typography variant='h6' className='available'>Available: <span style={{color: '#1976d2'}}>{product.inventory.available}</span></Typography>
         <div className='btn-div'>
-          quantity:
+          quantity: 
           <Button type="button" size="small" onClick={handleDecrease}>-</Button>
           <span className='quantity'>{add}</span>
           <Button type="button" size="small" onClick={handleIncrease}>+</Button>
         </div>
         <Typography variant='h5' color='primary'>Subtotal: <span className='subtotal-price'>${add * price}</span></Typography>
-        <Button style={{margin: '45px 0 20px 0', width: '100%'}} variant="contained" type="button" color="primary" onClick={() => handleAddToCart(product.id, add)}>Add to Cart</Button>
-        <Button style={{width: '100%'}} component={Link} to='/' variant="contained" type="button">go back</Button>
+        <Button style={{margin: '35px 0 5px 0', width: '100%'}} variant="contained" type="button" color="primary" onClick={() => {add > 0 && handleAddToCart(product.id, add)}}>Add to Cart</Button>
+        <Button style={{margin: '5px 0 5px 0', width: '100%'}} component={Link} to='/' variant="contained" color='secondary' type="button">go back</Button>
       </CardContent>
     </Card>
   )
