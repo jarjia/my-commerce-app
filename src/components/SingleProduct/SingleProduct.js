@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { Button } from '@material-ui/core';
 import { Card, CardMedia, CardContent, Typography} from '@mui/material'
 import './styles.css'
-import { FormatColorResetRounded } from '@mui/icons-material';
 
 const SingleProduct = ({products, handleAddToCart}) => {
   const [add, setAdd] = useState(0);
   const { productId } = useParams();
-  const navigate = useNavigate();
 
   const product = products.find(item => `:${item.id}` === productId)
   let price = parseFloat(product.price.formatted.replace(/,/g, ''))
@@ -52,8 +50,13 @@ const SingleProduct = ({products, handleAddToCart}) => {
           <Button type="button" size="small" onClick={handleIncrease}>+</Button>
         </div>
         <Typography variant='h5' color='primary'>Subtotal: <span className='subtotal-price'>${add * price}</span></Typography>
-        <Button style={{margin: '35px 0 5px 0', width: '100%'}} variant="contained" type="button" color="primary" onClick={() => {add > 0 && handleAddToCart(product.id, add)}}>Add to Cart</Button>
-        <Button style={{margin: '5px 0 5px 0', width: '100%'}} component={Link} to='/' variant="contained" color='secondary' type="button">go back</Button>
+        <Button style={{margin: '35px 0 5px 0', width: '100%'}} variant="contained" type="button" color="primary" onClick={
+          add > 0 ? () => handleAddToCart(product.id, add) : undefined
+        }>Add to Cart</Button>
+        <div className='link-btns'>
+          <Button style={{margin: '5px 0 5px 0', width: '100%', color: 'white', backgroundColor: '#FBC02D'}} component={Link} to='/cart' variant="contained" type="button">go to cart</Button>
+          <Button style={{margin: '5px 0 5px 0', width: '100%'}} component={Link} to='/' variant="contained" color='secondary' type="button">go back</Button>
+        </div>
       </CardContent>
     </Card>
   )

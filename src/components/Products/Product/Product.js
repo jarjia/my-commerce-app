@@ -6,7 +6,6 @@ import useStyles from './styles'
 
 const Product = ({product, onAddToCart}) => {
     const classes = useStyles();
-    console.log(product);
 
     const handleAddToCart = () => onAddToCart(product.id, 1);
 
@@ -34,7 +33,7 @@ const Product = ({product, onAddToCart}) => {
                 <Link to={`/:${product.id}`} className={classes.link}>Show more</Link>
             </IconButton>
             <IconButton aria-label='Add to Cart'
-                onClick={product.inventory.available > 0 && handleAddToCart}
+                onClick={product.inventory.available > 0 ? handleAddToCart : undefined}
             >
                 <AddShoppingCart />
             </IconButton>
