@@ -1,5 +1,5 @@
 .root {
-    margin: 100px 0;
+    margin: 100px 0 30px 0;
     padding: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -12,11 +12,69 @@
     width: auto;
     align-self: center;
 }
-.name {
+.header {
+    display: flex;
+    justify-content: space-between;
     color: #111111;
     font-family: sans-serif;
     border-bottom: 2px solid black;
     padding: 25px 0;
+    max-height: 3em;
+}
+.link-list {
+    display: flex;
+    height: 100%;
+    position: relative;
+    bottom: 10px;
+}
+.ul {
+    border: 1px solid lightgray;
+    box-shadow: 0 0 5px lightgray;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: white;
+}
+.link-parent {
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.link-parent:hover {
+    background-color: rgba(236, 236, 236, 0.623);
+}
+.link {
+    color: #111111;
+    list-style-type: none;
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+}
+.no-related {
+    padding: 5px;
+    margin: 5px;
+    color: #111111;
+    text-align: center;
+    font-family: sans-serif;
+}
+.arrow-rotate {
+    transform: rotateX(180deg);
+}
+.list-btn {
+    font-family: sans-serif;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    line-height: 26px;
+    font-size: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.list-btn:hover {
+    background-color: rgba(236, 236, 236, 0.623);
 }
 .desc-div {
     display: flex;

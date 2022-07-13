@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Button } from '@material-ui/core';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Card, CardMedia, CardContent, Typography} from '@mui/material'
 import './styles.css'
 
 const SingleProduct = ({products, handleAddToCart}) => {
   const [add, setAdd] = useState(0);
+  const [related, setRelated] = useState(false)
   const { productId } = useParams();
 
   const product = products.find(item => `:${item.id}` === productId)
@@ -31,12 +33,34 @@ const SingleProduct = ({products, handleAddToCart}) => {
     })
   }
 
+  const handleRelatedProducts = () => {
+    setRelated(prev => !prev)
+  }
 
   return (
     <Card className='root'>
       <CardMedia  className='media' image={product.image.url} alt={product.name} title={product.name}/>
       <CardContent  className='card-content'>
-        <Typography variant='h4' className='name'>{product.name}</Typography>
+        <div className='header'>
+          <Typography variant='h4'>{product.name}</Typography>
+          <div className='link-list'>
+            <ul className='ul'>
+              <button className='list-btn' onClick={handleRelatedProducts}>
+                Explore Related Products
+                <KeyboardArrowUpIcon className={related ? `arrow` : `arrow-rotate`}/>
+              </button>
+              <div style={{
+                display: related ? 'block' : 'none'
+              }}>
+                {product.related_products.length === 0 ? <div className='no-related'>No Related Products</div> : product.related_products.map(item => {
+                  return <Button key={item.id} component={Link} to={`/:${item.id}`} className='link'>
+                    {item.name}
+                  </Button>
+                })}
+              </div>
+            </ul>
+          </div>
+        </div>
         <div className='desc-div'>
           <Typography variant='h6' className='desc'>Description: </Typography>
           <Typography variant='body1' className='description' color='textprimary' dangerouslySetInnerHTML={{__html: product.description }}></Typography>
