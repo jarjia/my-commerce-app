@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { textAlign } from '@mui/system';
 
 export default makeStyles(() => ({
   root: {
@@ -34,5 +33,9 @@ export default makeStyles(() => ({
     color: 'white',
     fontFamily: 'sans-serif',
     fontSize: '14px'
+  },
+  desc: {
+    overflow: 'hidden',
+    maxHeight: '3.5em',
   }
 }));

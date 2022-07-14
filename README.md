@@ -17,6 +17,6 @@ In this app you can upload your products on api and it will be displayed on the 
 ## How to access my app:
 
 - $ git clone https://github.com/jarjia/my-commerce-app.git
-- $ cd my-blog
+- $ cd react-e
 - $ npm install
 - $ npm start

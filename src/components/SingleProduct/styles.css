@@ -10,7 +10,6 @@
 }
 .card-content {
     width: auto;
-    align-self: center;
 }
 .header {
     display: flex;
@@ -48,7 +47,7 @@
     list-style-type: none;
     padding: 5px;
     margin: 5px;
-    width: 100%;
+    width: calc(100% - 10px);
 }
 .no-related {
     padding: 5px;
@@ -76,17 +75,8 @@
 .list-btn:hover {
     background-color: rgba(236, 236, 236, 0.623);
 }
-.desc-div {
-    display: flex;
-    margin: 15px 0;
-}
-.desc {
-    align-self: center;
-}
-.description {
-    padding: 2px 5px;
-    position: relative;
-    top: 2px;
+.price {
+    padding-top: 15px;
 }
 .btn-div {
     margin: 25px 0;
@@ -105,6 +95,46 @@
 .link-btns {
     display: flex;
     gap: 15px;
+}
+.desc-div {
+    display: block;
+    text-align: center;
+}
+.desc-link {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: blue;
+    font-size: 18px;
+    text-decoration: underline;
+}
+.desc {
+    padding: 10px 0 0 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.inp {
+    outline: none;
+    width: auto;
+    border: 1px solid transparent;
+    background-color: transparent;
+    max-width: 20px;
+    height: 25px;
+    font-size: 13pt;
+    text-align: center;
+}
+.link-btns .custom-btn {
+    margin: 5px 0 5px 0;
+    width: 100%; 
+    color: white; 
+    background-color: #FBC02D;
+}
+.link-btns .custom-btn:hover {
+    background-color: #dfac2b;
 }
 
 @media only screen and (max-width: 768px) {
@@ -133,5 +163,19 @@
     }
     .available {
         padding: 0;
+    }
+}
+@media only screen and (max-width: 280px) {
+    .root {
+        padding: 10px;
+    }
+    .card-content {
+        text-align: center;
+    }
+    .header {
+        display: inline-block;
+    }
+    .link-list {
+        display: none;
     }
 }
