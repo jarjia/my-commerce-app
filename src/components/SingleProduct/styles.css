@@ -32,6 +32,7 @@
     border-radius: 10px;
     padding: 5px;
     background-color: white;
+    width: 100%;
 }
 .link-parent {
     padding: 5px;
@@ -47,7 +48,7 @@
     list-style-type: none;
     padding: 5px;
     margin: 5px;
-    width: calc(100% - 10px);
+    width: 100%;
 }
 .no-related {
     padding: 5px;
@@ -177,5 +178,8 @@ input::-webkit-inner-spin-button {
     }
     .link-list {
         display: none;
+    }
+    .desc-div .desc {
+        font-size: 26px;
     }
 }

@@ -8,6 +8,7 @@ function App() {
   const [cart, setCart] = useState({})
   const [errorMessage, setErrorMessage] = useState('');
   const [order, setOrder] = useState({});
+  console.log(products);
 
   const fetchProducts = async () => {
     const {data} = await commerce.products.list();
@@ -74,7 +75,7 @@ function App() {
             <Route path='/' element={<Products products={products} onAddToCart={handleAddToCart}/>}/>
             <Route path='/:productId' element={<SingleProduct products={products} handleAddToCart={handleAddToCart}/>}/>
             <Route path='/cart' element={<Cart 
-                cart={cart} 
+                cart={cart}
                 handleUpdateProduct={handleUpdateProduct}
                 handleRemoveProduct={handleRemoveProduct}
                 handleEmptyProduct={handleEmptyProduct}

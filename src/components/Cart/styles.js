@@ -11,12 +11,11 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginBottom: '5px',
     },
-    [theme.breakpoints.up('xs')]: {
-      marginRight: '20px',
-    },
   },
   checkoutButton: {
     minWidth: '150px',
+    marginLeft: '20px',
+    '@media (max-width: 633px)': { marginTop: 10 }
   },
   link: {
     textDecoration: 'none',
@@ -30,5 +29,6 @@ export default makeStyles((theme) => ({
     marginBottom: '3%',
     width: '100%',
     justifyContent: 'space-between',
+    padding: '0 30px'
   },
 }));

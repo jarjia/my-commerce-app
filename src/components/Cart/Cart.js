@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useStyles from './styles';
 import CartItem from './CartItem/CartItem'
 
-const Cart = ({ cart, handleUpdateProduct, handleRemoveProduct, handleEmptyProduct }) => {
+const Cart = ({cart, handleUpdateProduct, handleRemoveProduct, handleEmptyProduct }) => {
     const classes = useStyles();
 
     const EmptyCart = () => {
@@ -28,7 +28,7 @@ const Cart = ({ cart, handleUpdateProduct, handleRemoveProduct, handleEmptyProdu
         </Grid>
         <div className={classes.cardDetails}>
             <Typography variant="h5">Subtotal: {cart.subtotal.formatted_with_symbol}</Typography>
-            <div>
+            <div style={{textAlign: 'right'}}>
                 <Button className={classes.emptyButton} onClick={handleEmptyProduct} size="large" type="button" variant="contained" color="secondary">Empty cart</Button>
                 <Button component={Link} to='/checkout' className={classes.checkoutButton} size="large" type="button" variant="contained" color="primary">Checkout</Button>
             </div>

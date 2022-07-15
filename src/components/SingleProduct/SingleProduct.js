@@ -82,7 +82,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
                 <KeyboardArrowUpIcon className={related ? `arrow` : `arrow-rotate`}/>
               </button>
               <div style={{
-                display: related ? 'block' : 'none'
+                display: related ? 'block' : 'none',
               }}>
                 {product.related_products.length === 0 ? <div className='no-related'>No Related Products</div> : product.related_products.map(item => {
                   return <Button key={item.id} component={Link} to={`/:${item.id}`} className='link' onClick={handleRelatedProducts}>
@@ -94,7 +94,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
           </div>
         </div>
         {desc === 1 ? <div className='first-page'>
-          <Typography variant='h6' className='desc'>Description: <button className='desc-link' onClick={handleGoToDesc}>Go to Description</button></Typography>
+          <Typography variant='h6' className='desc'>Description: <button className='desc-link' onClick={handleGoToDesc}><i>Go to Description</i></button></Typography>
           <Typography variant='h6' className='price'>Price: <span style={{color: '#1976d2', fontSize: '20px', marginLeft: '5px'}}>{product.price.formatted_with_symbol}</span></Typography>
           <Typography variant='h6' className='available'>Available: <span style={{color: '#1976d2'}}>{product.inventory.available}</span></Typography>
           <div className='btn-div'>
@@ -122,10 +122,10 @@ const SingleProduct = ({products, handleAddToCart}) => {
             <Button style={{margin: '5px 0 5px 0', width: '100%'}} component={Link} to='/' variant="contained" color='secondary' type="button">go back</Button>
           </div>
         </div> :
-        <div className='second-page'>
+        <div className='desc-page'>
           <div className='desc-div'>
             <Typography variant='h4' className='desc'>Description</Typography>
-            <button className='desc-link' onClick={handleGoToMain}>Go to Main Product</button>
+            <button className='desc-link' onClick={handleGoToMain}><i>Go Back</i></button>
             <Typography variant='body1' className='description' color='textprimary' dangerouslySetInnerHTML={{__html: product.description }}></Typography>
           </div>
         </div>}
