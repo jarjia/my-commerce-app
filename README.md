@@ -6,7 +6,7 @@ In this app you can upload your products on api and it will be displayed on the 
     - React.js (^18.2.0)
     - react-hook-form (^7.33.1)
     - react-router-dom (^6.3.0)
-    - @stripe/react-stripe-js ("^1.9.0)
+    - @stripe/react-stripe-js (^1.9.0)
     - @stripe/stripe-js (^1.32.0)
     - @material-ui/core (^4.12.4)
     - @mui/icons-material (^5.8.4)
