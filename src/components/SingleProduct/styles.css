@@ -120,10 +120,9 @@ input::-webkit-inner-spin-button {
 }
 .inp {
     outline: none;
-    width: auto;
-    border: 1px solid transparent;
     background-color: transparent;
-    max-width: 20px;
+    border: none;
+    max-width: 35px;
     height: 25px;
     font-size: 13pt;
     text-align: center;
@@ -137,8 +136,12 @@ input::-webkit-inner-spin-button {
 .link-btns .custom-btn:hover {
     background-color: #dfac2b;
 }
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1100px) {
+    .header {
+        padding: 35px 0;
+    }
+}
+@media only screen and (max-width: 805px) {
     .root {
         margin: 60px 0 35px 0;
         padding: 20px;
@@ -148,6 +151,10 @@ input::-webkit-inner-spin-button {
         border-bottom: 2px solid gray;
         border-right: none;
         padding: 40%;
+    }
+    .header {
+        display: flex;
+        padding: 35px 0;
     }
     .name {
         padding: 10px 0;
@@ -166,6 +173,17 @@ input::-webkit-inner-spin-button {
         padding: 0;
     }
 }
+@media only screen and (max-width: 560px) {
+    .header {
+        display: block;
+        padding: 0 0 50px;
+    }
+}
+@media only screen and (max-width: 329px) {
+    .header {
+        padding: 0 0 115px;
+    }
+}
 @media only screen and (max-width: 280px) {
     .root {
         padding: 10px;
@@ -175,9 +193,6 @@ input::-webkit-inner-spin-button {
     }
     .header {
         display: inline-block;
-    }
-    .link-list {
-        display: none;
     }
     .desc-div .desc {
         font-size: 26px;

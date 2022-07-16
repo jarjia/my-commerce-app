@@ -22,11 +22,11 @@ const Product = ({product, onAddToCart}) => {
                 <Typography variant='h5' gutterBottom>
                     {product.name}
                 </Typography>
-                <Typography variant='h6' gutterBottom>
+                <Typography variant='h5' gutterBottom>
                     ${product.price.formatted}
                 </Typography>
             </div>
-            <Typography variant='body2' color='textSecondary' className={classes.desc} dangerouslySetInnerHTML={{__html: product.description }}></Typography>
+            <Typography variant='body1' color='textSecondary' className={classes.desc} dangerouslySetInnerHTML={{__html: product.description }}></Typography>
         </CardContent>
         <CardActions disableSpacing className={classes.cardActions}>
             <IconButton aria-label='Show More'>

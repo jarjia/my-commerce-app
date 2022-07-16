@@ -11,8 +11,18 @@ const SingleProduct = ({products, handleAddToCart}) => {
   const [desc, setDesc] = useState(1)
   const { productId } = useParams();
 
+  const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
+    maximumFractionDigits: 0,
+  })
   const product = products.find(item => `:${item.id}` === productId)
   let price = parseFloat(product.price.formatted.replace(/,/g, ''))
+
+  const formatOperand = (operand) => {
+    if (operand == null) return
+    const [integer, decimal] = operand.split(".")
+    if (decimal == null) return INTEGER_FORMATTER.format(integer)
+    return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
+  }
 
   const handleIncrease = () => {
     const {available} = product.inventory
@@ -94,7 +104,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
           </div>
         </div>
         {desc === 1 ? <div className='first-page'>
-          <Typography variant='h6' className='desc'>Description: <button className='desc-link' onClick={handleGoToDesc}><i>Go to Description</i></button></Typography>
+          <Typography variant='h6' className='desc'>Description: <button className='desc-link' onClick={handleGoToDesc}><i>See The Description</i></button></Typography>
           <Typography variant='h6' className='price'>Price: <span style={{color: '#1976d2', fontSize: '20px', marginLeft: '5px'}}>{product.price.formatted_with_symbol}</span></Typography>
           <Typography variant='h6' className='available'>Available: <span style={{color: '#1976d2'}}>{product.inventory.available}</span></Typography>
           <div className='btn-div'>
@@ -113,7 +123,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
               minHeight: "20px"
             }}>+</Button>
           </div>
-          <Typography variant='h5' color='primary'>Subtotal: <span className='subtotal-price'>${add * price}</span></Typography>
+          <Typography variant='h5' color='primary'>Subtotal: <span className='subtotal-price'>${formatOperand(String(add * price))}</span></Typography>
           <Button style={{margin: '35px 0 5px 0', width: '100%'}} variant="contained" type="button" color="primary" onClick={
             add > 0 ? () => handleAddToCart(product.id, add) : undefined
           }>Add to Cart</Button>
@@ -125,8 +135,8 @@ const SingleProduct = ({products, handleAddToCart}) => {
         <div className='desc-page'>
           <div className='desc-div'>
             <Typography variant='h4' className='desc'>Description</Typography>
-            <button className='desc-link' onClick={handleGoToMain}><i>Go Back</i></button>
             <Typography variant='body1' className='description' color='textprimary' dangerouslySetInnerHTML={{__html: product.description }}></Typography>
+            <button className='desc-link' onClick={handleGoToMain}><i>Go Back</i></button>
           </div>
         </div>}
       </CardContent>
