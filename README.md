@@ -1,6 +1,6 @@
 # Commerce App
 
-In this app you can upload your products on api and it will be displayed on the page, also you can buy them with test card and the order will be sent to your email with all the details
+In this app you can upload your products on api and it will be displayed on the page, also you can buy them with test card.
 
 ## Technologies i used:
     - React.js (^18.2.0)

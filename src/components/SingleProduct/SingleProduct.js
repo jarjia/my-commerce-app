@@ -69,9 +69,9 @@ const SingleProduct = ({products, handleAddToCart}) => {
     setAdd(prev => {
       if(value > available) {
         return prev = available
-      }else if(value < 0){
+      }else if(value < 0) {
         return prev = 0
-      }else if(value === 0){
+      }else if(value === 0) {
         return value === 0
       }else {
         return prev = value
