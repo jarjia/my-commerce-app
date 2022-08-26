@@ -79,6 +79,9 @@
 .list-btn:hover {
     background-color: rgba(236, 236, 236, 0.623);
 }
+input::placeholder {
+    color: black;
+}
 .price {
     padding-top: 15px;
 }

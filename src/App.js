@@ -50,7 +50,6 @@ function App() {
   };
 
   const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
-    console.log(checkoutTokenId, newOrder);
     try {
       const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
       setOrder(incomingOrder);
@@ -65,7 +64,6 @@ function App() {
     fetchProducts();
     fetchCart();
   }, [])
-console.log(cart.line_items)
   return (
       <Router>
           <Navbar products={products} totalCart={cart.total_items}/>

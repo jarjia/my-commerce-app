@@ -20,11 +20,10 @@ const SingleProduct = ({products, handleAddToCart}) => {
     }).then(response => setData(response.data[0]));
   }, [productId])
 
-
   const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
     maximumFractionDigits: 0,
   })
-  // const product = products.find(item => `:${item.id}` === productId)
+
   let price = data && parseFloat(data.price.formatted.replace(/,/g, ''))
 
   const formatOperand = (operand) => {
@@ -78,11 +77,12 @@ const SingleProduct = ({products, handleAddToCart}) => {
         return prev = available
       }else if(value < 0) {
         return prev = 0
+      }else if(value === '') {
+        return prev = 0
       }else if(value.split('')[0] === '0') {
-        return prev = '0'
+        let val = value.split('')[0].slice(0, -1) + value.split('')[1]
+        return prev = val
       }else {
-        console.log(prev);
-        console.log(typeof value)
         return prev = value
       }
     })
@@ -105,7 +105,10 @@ const SingleProduct = ({products, handleAddToCart}) => {
                 display: related ? 'block' : 'none',
               }}>
                 {data.related_products.length === 0 ? <div className='no-related'>No Related Products</div> : data.related_products.map(item => {
-                  return <Button key={item.id} component={Link} to={`/:${item.id}`} className='link' onClick={handleRelatedProducts}>
+                  return <Button key={item.id} component={Link} to={`/:${item.id}`} className='link' onClick={() => {
+                    handleRelatedProducts()
+                    setAdd(0)
+                  }}>
                     {item.name}
                   </Button>
                 })}
@@ -125,7 +128,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
               minWidth: "40px",
               minHeight: "20px"
             }}>-</Button>
-            <input type='number' className='inp' value={add} onChange={handleOnchange} autoComplete='off'/>
+            <input type='number' placeholder='0' className='inp' value={add} onChange={handleOnchange} autoComplete='off'/>
             <Button className='digits' type="button" onClick={handleIncrease} style={{
               maxWidth: "60px",
               maxHeight: "40px",
