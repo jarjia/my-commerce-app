@@ -8,7 +8,6 @@ function App() {
   const [cart, setCart] = useState({})
   const [errorMessage, setErrorMessage] = useState('');
   const [order, setOrder] = useState({});
-  console.log(products);
 
   const fetchProducts = async () => {
     const {data} = await commerce.products.list();
@@ -66,11 +65,10 @@ function App() {
     fetchProducts();
     fetchCart();
   }, [])
-
+console.log(cart.line_items)
   return (
       <Router>
-        <div>
-          {cart.line_items && <Navbar products={products} totalCart={cart.total_items}/>}
+          <Navbar products={products} totalCart={cart.total_items}/>
           <Routes>
             <Route path='/' element={<Products products={products} onAddToCart={handleAddToCart}/>}/>
             <Route path='/:productId' element={<SingleProduct products={products} handleAddToCart={handleAddToCart}/>}/>
@@ -85,7 +83,6 @@ function App() {
               <Checkout cart={cart} order={order} handleCaptureCheckout={handleCaptureCheckout} error={errorMessage}/>
             }/>
           </Routes>
-        </div>
       </Router>
   );
 }

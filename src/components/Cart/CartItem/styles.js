@@ -6,6 +6,9 @@ export default makeStyles(() => ({
   },
   media: {
     height: 260,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundSize: "contain",
   },
   cardContent: {
     display: 'flex',

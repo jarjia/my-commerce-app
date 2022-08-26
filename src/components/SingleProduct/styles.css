@@ -7,6 +7,9 @@
 .media {
     padding: 40% 40%;
     border-right: 2px solid gray;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
 }
 .card-content {
     width: auto;

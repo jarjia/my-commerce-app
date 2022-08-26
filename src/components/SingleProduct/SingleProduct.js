@@ -1,21 +1,31 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Button } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Card, CardMedia, CardContent, Typography} from '@mui/material'
 import './styles.css'
+import {commerce} from "../../lib/Commerce"
 
 const SingleProduct = ({products, handleAddToCart}) => {
   const [add, setAdd] = useState(0);
   const [related, setRelated] = useState(false)
   const [desc, setDesc] = useState(1)
+  const [data, setData] = useState();
+  
   const { productId } = useParams();
+
+  useEffect(() => {
+    commerce.products.list({
+      query: productId,
+    }).then(response => setData(response.data[0]));
+  }, [productId])
+
 
   const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
     maximumFractionDigits: 0,
   })
-  const product = products.find(item => `:${item.id}` === productId)
-  let price = parseFloat(product.price.formatted.replace(/,/g, ''))
+  // const product = products.find(item => `:${item.id}` === productId)
+  let price = data && parseFloat(data.price.formatted.replace(/,/g, ''))
 
   const formatOperand = (operand) => {
     if (operand == null) return
@@ -25,25 +35,22 @@ const SingleProduct = ({products, handleAddToCart}) => {
   }
 
   const handleIncrease = () => {
-    const {available} = product.inventory
+    const {available} = data.inventory
     setAdd(prev => {
-      if(prev === '') {
-        return prev === 0
-      }else if(prev === available || available === 0) {
-        return prev = available
-      }else if(prev > available){
-        return prev = available
+      let num = parseFloat(prev)
+      if(num === available || available === 0) {
+        return num = available
+      }else if(num > available){
+        return num = available
       }else {
-        return prev + 1
+        return num + 1
       }
     })
   }
 
   const handleDecrease = () => {
     setAdd(prev => {
-      if(prev === 0) {
-        return prev = 0
-      }else if(prev <= 0){
+     if(prev <= 0){
         return prev = 0
       }else {
         return prev - 1
@@ -65,15 +72,17 @@ const SingleProduct = ({products, handleAddToCart}) => {
 
   const handleOnchange = (event) => {
     const {value} = event.target
-    const {available} = product.inventory
+    const {available} = data.inventory
     setAdd(prev => {
       if(value > available) {
         return prev = available
       }else if(value < 0) {
         return prev = 0
-      }else if(value === 0) {
-        return value === 0
+      }else if(value.split('')[0] === '0') {
+        return prev = '0'
       }else {
+        console.log(prev);
+        console.log(typeof value)
         return prev = value
       }
     })
@@ -81,10 +90,11 @@ const SingleProduct = ({products, handleAddToCart}) => {
 
   return (
     <Card className='root'>
-      <CardMedia  className='media' image={product.image.url} alt={product.name} title={product.name}/>
+      {data && <>
+      <CardMedia  className='media' image={data.image.url} alt={data.name} title={data.name}/>
       <CardContent  className='card-content'>
         <div className='header'>
-          <Typography variant='h4'>{product.name}</Typography>
+          <Typography variant='h4'>{data.name}</Typography>
           <div className='link-list'>
             <ul className='ul'>
               <button className='list-btn' onClick={handleRelatedProducts}>
@@ -94,7 +104,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
               <div style={{
                 display: related ? 'block' : 'none',
               }}>
-                {product.related_products.length === 0 ? <div className='no-related'>No Related Products</div> : product.related_products.map(item => {
+                {data.related_products.length === 0 ? <div className='no-related'>No Related Products</div> : data.related_products.map(item => {
                   return <Button key={item.id} component={Link} to={`/:${item.id}`} className='link' onClick={handleRelatedProducts}>
                     {item.name}
                   </Button>
@@ -105,8 +115,8 @@ const SingleProduct = ({products, handleAddToCart}) => {
         </div>
         {desc === 1 ? <div className='first-page'>
           <Typography variant='h6' className='desc'>Description: <button className='desc-link' onClick={handleGoToDesc}><i>See The Description</i></button></Typography>
-          <Typography variant='h6' className='price'>Price: <span style={{color: '#1976d2', fontSize: '20px', marginLeft: '5px'}}>{product.price.formatted_with_symbol}</span></Typography>
-          <Typography variant='h6' className='available'>Available: <span style={{color: '#1976d2'}}>{product.inventory.available}</span></Typography>
+          <Typography variant='h6' className='price'>Price: <span style={{color: '#1976d2', fontSize: '20px', marginLeft: '5px'}}>{data.price.formatted_with_symbol}</span></Typography>
+          <Typography variant='h6' className='available'>Available: <span style={{color: '#1976d2'}}>{data.inventory.available}</span></Typography>
           <div className='btn-div'>
             quantity: 
             <Button className='digits' type="button" onClick={handleDecrease} style={{
@@ -125,7 +135,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
           </div>
           <Typography variant='h5' color='primary'>Subtotal: <span className='subtotal-price'>${formatOperand(String(add * price))}</span></Typography>
           <Button style={{margin: '35px 0 5px 0', width: '100%'}} variant="contained" type="button" color="primary" onClick={
-            add > 0 ? () => handleAddToCart(product.id, add) : undefined
+            add > 0 ? () => handleAddToCart(data.id, add) : undefined
           }>Add to Cart</Button>
           <div className='link-btns'>
             <Button className='custom-btn' component={Link} to='/cart' variant="contained" type="button">go to cart</Button>
@@ -135,11 +145,11 @@ const SingleProduct = ({products, handleAddToCart}) => {
         <div className='desc-page'>
           <div className='desc-div'>
             <Typography variant='h4' className='desc'>Description</Typography>
-            <Typography variant='body1' className='description' color='textprimary' dangerouslySetInnerHTML={{__html: product.description }}></Typography>
+            <Typography variant='body1' className='description' color='textprimary' dangerouslySetInnerHTML={{__html: data.description }}></Typography>
             <button className='desc-link' onClick={handleGoToMain}><i>Go Back</i></button>
           </div>
         </div>}
-      </CardContent>
+      </CardContent> </>}
     </Card>
   )
 }
