@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Card, CardMedia, CardContent, Typography} from '@mui/material'
 import './styles.css'
@@ -89,8 +89,8 @@ const SingleProduct = ({products, handleAddToCart}) => {
   }
 
   return (
-    <Card className='root'>
-      {data && <>
+    <Card className={`root ${data ? '' : 'root-1'}`}>
+      {data ? <>
       <CardMedia  className='media' image={data.image.url} alt={data.name} title={data.name}/>
       <CardContent  className='card-content'>
         <div className='header'>
@@ -152,7 +152,9 @@ const SingleProduct = ({products, handleAddToCart}) => {
             <button className='desc-link' onClick={handleGoToMain}><i>Go Back</i></button>
           </div>
         </div>}
-      </CardContent> </>}
+      </CardContent> </> : <div className='loading'>
+        <CircularProgress />
+      </div>}
     </Card>
   )
 }

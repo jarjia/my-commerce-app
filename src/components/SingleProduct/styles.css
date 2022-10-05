@@ -82,6 +82,13 @@
 input::placeholder {
     color: black;
 }
+.loading {
+    text-align: center;
+}
+.root-1 {
+    display: grid;
+    grid-template-columns: 1fr;
+}
 .price {
     padding-top: 15px;
 }
