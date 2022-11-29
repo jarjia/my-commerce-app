@@ -10,6 +10,10 @@
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: contain !important;
+    cursor: zoom-in;
+}
+.media:hover {
+    padding: 45% 45%;
 }
 .card-content {
     width: auto;
