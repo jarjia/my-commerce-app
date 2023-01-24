@@ -64,6 +64,7 @@ function App() {
     fetchProducts();
     fetchCart();
   }, [])
+  
   return (
       <Router>
           <Navbar products={products} totalCart={cart.total_items}/>

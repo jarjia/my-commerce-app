@@ -91,7 +91,7 @@ const SingleProduct = ({products, handleAddToCart}) => {
   return (
     <Card className={`root ${data ? '' : 'root-1'}`}>
       {data ? <>
-      <CardMedia  className='media' image={data.image.url} alt={data.name} title={data.name}/>
+      <CardMedia className='media' image={data.image.url} alt={data.name} title={data.name}/>
       <CardContent  className='card-content'>
         <div className='header'>
           <Typography variant='h4'>{data.name}</Typography>
